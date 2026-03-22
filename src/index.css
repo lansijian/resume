@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-zinc-50 text-zinc-900 antialiased font-sans dark:bg-zinc-950 dark:text-zinc-100;
+  }
+
+  ::selection {
+    @apply bg-zinc-300/80 text-zinc-900 dark:bg-zinc-600 dark:text-white;
+  }
+}
+
+@layer utilities {
+  .card-surface {
+    @apply rounded-2xl border border-zinc-200 bg-white shadow-card dark:border-zinc-800 dark:bg-zinc-900/80 dark:shadow-cardDark;
+  }
+}
+
+@media print {
+  body {
+    @apply bg-white text-zinc-900;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-break {
+    break-inside: avoid;
+  }
+
+  .card-surface {
+    @apply border-zinc-200 bg-white shadow-none;
+  }
+}
