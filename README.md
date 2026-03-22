@@ -1,4 +1,4 @@
-# HKUST 夏令营 · 个人简历网页
+# 个人简历网页
 
 基于 Vite、React、TypeScript、Tailwind CSS 的单页简历站点。文案集中在 `src/content/resume.ts` 的 `resumes.zh` / `resumes.en` 中，分别维护中英文；顶栏可切换 **日间/夜间** 主题与 **中/EN** 语言。
 
