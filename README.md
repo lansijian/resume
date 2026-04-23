@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 个人主页（AcadHomepage 风格 · React）
 
 基于 Vite、React、TypeScript、Tailwind CSS 的单页个人主页/简历站点（**保留 React 技术栈，整体布局与信息结构对齐 acad-homepage**）。
@@ -10,11 +9,6 @@
 ## 页面栏目（锚点）
 
 当前页面按学术主页风格重排为以下栏目（可在顶栏跳转）：About / News / Publications & Projects / Honors / Educations / Internships / Skills / Contact。
-=======
-# 个人简历网页
-
-基于 Vite、React、TypeScript、Tailwind CSS 的单页简历站点。文案集中在 `src/content/resume.ts` 的 `resumes.zh` / `resumes.en` 中，分别维护中英文；顶栏可切换 **日间/夜间** 主题与 **中/EN** 语言。
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
 
 ## 本地开发
 
@@ -61,11 +55,7 @@ npm run preview
 
 ## 打印 / PDF
 
-<<<<<<< HEAD
 可在浏览器中使用打印（Ctrl+P）另存为 PDF。导航会在打印时通过 `no-print` 类隐藏，正文使用浅色打印样式（见 `src/index.css` 中 `@media print`）。
-=======
-页面右上角 Hero 区域有「打印 / 存 PDF」按钮，或在浏览器中使用打印（Ctrl+P），选择「另存为 PDF」。导航与页脚在打印时通过 `no-print` 类隐藏，正文使用浅色打印样式（见 `src/index.css` 中 `@media print`）。
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
 
 ## 主题与语言
 

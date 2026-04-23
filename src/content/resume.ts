@@ -14,11 +14,8 @@ export type ProjectEntry = {
   period: string;
   summary: string;
   bullets: string[];
-<<<<<<< HEAD
-  /** 项目/论文配图，建议放在 public/images/works/ 下，例如 /images/works/proj-01.jpg */
+  /** 项目/论文配图（放在 public/photo 或 public/images 下），例如 /photo/xxx.jpg */
   imageSrc?: string;
-=======
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
   links?: { label: string; href: string }[];
 };
 
@@ -58,11 +55,8 @@ export type ResearchEntry = {
   period: string;
   summary: string;
   bullets: string[];
-<<<<<<< HEAD
   /** 科研条目配图，建议放在 public/photo/ 或 public/images/ 下，例如 /photo/xxx.jpg */
   imageSrc?: string;
-=======
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
 };
 
 export type CertificateEntry = {
@@ -237,7 +231,6 @@ export const resumes: Record<Locale, ResumeContent> = {
     internships: [
       {
         title: "中国移动「梧桐鸿浩」2026 研学冬令营暨寒假线上实习",
-<<<<<<< HEAD
         role: "数智事业部 · 多语言翻译大模型微调与评测（实习生）",
         period: "2026 寒假",
         summary:
@@ -248,15 +241,6 @@ export const resumes: Record<Locale, ResumeContent> = {
           "对齐与安全：构造偏好数据进行 DPO/对比式对齐（或等效策略），降低幻觉与语言混杂；加入格式约束与可控输出模板，提升可用性。",
           "评测体系：搭建自动化评测流水线（BLEU/COMET/chrF 等 + 人评抽样），覆盖术语一致性、语法流畅性、实体保真与跨语言知识迁移等维度；沉淀可复现的实验记录。",
           "推理与部署：验证量化/混合精度推理可行性，梳理吞吐-延迟-显存权衡，为线上服务提供可落地的推理配置建议。",
-=======
-        role: "数智事业部 · 多模态多语言翻译大模型关键技术研究（实习生）",
-        period: "2026 寒假",
-        summary:
-          "参与中国移动数智事业部多模态多语言翻译大模型方向：开展训练与微调关键技术研究、跨语言知识迁移、翻译质量提升等。",
-        bullets: [
-          "数据准备：术语库构建，文本、语音语料构建等。",
-          "质量评测：模型多维度质量评测。",
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         ],
       },
     ],
@@ -267,10 +251,7 @@ export const resumes: Record<Locale, ResumeContent> = {
         period: "2024/04 — 2026/05",
         summary:
           "基于 ROS 的多无人机编队搜救仿真系统，集成高精度定位、实时检测与机间通信。",
-<<<<<<< HEAD
         imageSrc: "/photo/中国国际大学生创新大赛（上海赛区）铜奖.jpg",
-=======
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         bullets: [
           "搭建多机协同仿真链路，完成目标锁定与坐标广播协议设计。",
           "部署剪枝后的 YOLOv11，输入 1280×720，单帧推理 <50 ms。",
@@ -282,10 +263,7 @@ export const resumes: Record<Locale, ResumeContent> = {
         role: "组长",
         period: "2024/09 — 2026/06",
         summary: "基于 ROS2 与单目相机的自动瞄准与测距，融合传统视觉与深度学习。",
-<<<<<<< HEAD
         imageSrc: "/photo/RoboMaster国三.jpg",
-=======
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         bullets: [
           "PnP 解算测距；装甲板识别召回率由约 65% 提升至约 91%。",
           "卡尔曼滤波将 RMS 误差由约 12 cm 降至约 4 cm；自研抗陀螺算法，响应时间由约 1.8 s 降至约 0.6 s。",
@@ -296,10 +274,7 @@ export const resumes: Record<Locale, ResumeContent> = {
         role: "核心开发",
         period: "2025/10 — 2026/03",
         summary: "在华为昇腾 910B NPU 上部署视觉与大模型联合推理的交通枢纽智能系统。",
-<<<<<<< HEAD
         imageSrc: "/photo/Rokid银奖路演.jpg",
-=======
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         bullets: [
           "集成 YOLOv8n 与 Qwen2.5-7B，实时推理 25+ FPS，首 token 延迟 <200 ms。",
           "RAG + FastAPI 微服务，将感知结果转为可调度语义。",
@@ -308,7 +283,6 @@ export const resumes: Record<Locale, ResumeContent> = {
     ],
     research: [
       {
-<<<<<<< HEAD
         title: "3DVLN 推理加速：基于 SpatialLM 的拓扑网络机制",
         period: "2025/11 — 至今",
         summary:
@@ -320,15 +294,6 @@ export const resumes: Record<Locale, ResumeContent> = {
           "SpatialLM 适配：在 SpatialLM 的空间表征上叠加拓扑先验，设计轻量的融合模块与缓存策略，降低跨步推理重复计算；支持分段规划与局部重规划。",
           "工程实现：实现可复现训练/推理脚本、可视化调试工具（轨迹、注意力/检索命中、子图选择），用于定位失败案例并迭代模型结构与数据策略。",
           "部署探索：评估量化/裁剪/编译优化等手段对延迟与精度的影响，形成端侧与服务器侧部署的配置建议与边界条件。",
-=======
-        title: "多模态大模型（VLM）高效推理与部署",
-        period: "2025/11 — 至今",
-        summary:
-          "面向边缘与资源受限场景的推理与部署研究；相关成果已整理为 1 篇 IEEE/RAS IROS 第一作者论文，目前在投。",
-        bullets: [
-          "围绕多模态推理管线与端侧部署开展工程化实验。",
-          "关注延迟、显存占用与精度之间的权衡。",
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         ],
       },
     ],
@@ -338,18 +303,11 @@ export const resumes: Record<Locale, ResumeContent> = {
         role: "联合创始人 · 产品与技术",
         period: "2025 — 至今",
         summary:
-<<<<<<< HEAD
           "参与阿里云中小企业直播，受邀作为嘉宾参与杭州云栖小镇 2050 大会「市场人的“养虾”日记」活动分享；围绕 AI Agent 在内容生产与用户洞察中的落地进行实践与复盘。",
         imageSrc: "/photo/BUILD WITHQWEN·GenZ创造者48小时铜奖.jpg",
         bullets: [
           "在直播与线下活动中分享产品思路、用户增长与落地案例，沉淀可复用的方法论与演示材料。",
           "结合多模态能力与工作流编排，探索从“记录→结构化→洞察→行动建议”的闭环。",
-=======
-          "基于阿里云百炼构建的梦境记录与心理解读产品；持续迭代多模态分析与可视化能力。",
-        bullets: [
-          "获即将召开的千问大会展示资格。",
-          "将接受阿里云官方采访报道。",
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         ],
       },
       {
@@ -358,10 +316,7 @@ export const resumes: Record<Locale, ResumeContent> = {
         period: "2025 — 2026",
         summary:
           "融合国风美学与科幻叙事的虚拟偶像企划，探索大模型在角色塑造与互动中的落地。",
-<<<<<<< HEAD
         imageSrc: "/photo/深圳科创学院照片.jpg",
-=======
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         bullets: [
           "入围 2026 全球开发者先锋大会 · SE 超级个体创业实战大赛初赛。",
         ],
@@ -585,7 +540,6 @@ export const resumes: Record<Locale, ResumeContent> = {
       {
         title:
           "China Mobile \"Wutong Honghao\" 2026 Research Winter Camp & Winter Online Internship",
-<<<<<<< HEAD
         role: "Digital Intelligence Division · Trilingual LLM fine-tuning for translation (Intern)",
         period: "Winter 2026",
         summary:
@@ -596,15 +550,6 @@ export const resumes: Record<Locale, ResumeContent> = {
           "Alignment: introduced preference-style supervision (e.g., DPO or equivalent) to reduce hallucinations and code-mixing; enforced controllable output templates for downstream integration.",
           "Evaluation: built an automated eval pipeline (BLEU/COMET/chrF + sampling-based human review) covering terminology consistency, fluency, fidelity, and cross-lingual transfer; ensured reproducibility.",
           "Inference/serving: validated quantization and mixed-precision inference trade-offs; delivered deployable recommendations balancing latency, throughput, and memory.",
-=======
-        role: "Digital Intelligence Division · Multimodal multilingual translation LLM R&D (Intern)",
-        period: "Winter 2026",
-        summary:
-          "Multimodal multilingual translation LLM research: training & fine-tuning, cross-lingual knowledge transfer, and translation quality improvement.",
-        bullets: [
-          "Data preparation: terminology resources; text and speech corpus construction.",
-          "Quality evaluation: multi-dimensional model evaluation.",
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         ],
       },
     ],
@@ -616,10 +561,7 @@ export const resumes: Record<Locale, ResumeContent> = {
         period: "Apr 2024 — May 2026",
         summary:
           "Multi-UAV search-and-rescue simulation on ROS with positioning, detection, and inter-drone communication.",
-<<<<<<< HEAD
         imageSrc: "/photo/中国国际大学生创新大赛（上海赛区）铜奖.jpg",
-=======
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         bullets: [
           "Built coordination pipeline with target locking and coordinate broadcast.",
           "Deployed pruned YOLOv11 at 1280×720, inference under 50 ms per frame.",
@@ -631,10 +573,7 @@ export const resumes: Record<Locale, ResumeContent> = {
         role: "Lead",
         period: "Sep 2024 — Jun 2026",
         summary: "ROS2-based auto-aim with monocular PnP ranging; fusion of classical vision and deep learning.",
-<<<<<<< HEAD
         imageSrc: "/photo/RoboMaster国三.jpg",
-=======
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         bullets: [
           "Armor recall improved from ~65% to ~91%.",
           "Kalman filtering reduced RMS error from ~12 cm to ~4 cm; anti-spin logic cut response time from ~1.8 s to ~0.6 s.",
@@ -645,10 +584,7 @@ export const resumes: Record<Locale, ResumeContent> = {
         role: "Core Developer",
         period: "Oct 2025 — Mar 2026",
         summary: "Joint vision and LLM inference on Huawei Ascend 910B for hub intelligence.",
-<<<<<<< HEAD
         imageSrc: "/photo/Rokid银奖路演.jpg",
-=======
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         bullets: [
           "YOLOv8n + Qwen2.5-7B at 25+ FPS; first-token latency under 200 ms.",
           "RAG and FastAPI microservices for schedulable semantics.",
@@ -657,7 +593,6 @@ export const resumes: Record<Locale, ResumeContent> = {
     ],
     research: [
       {
-<<<<<<< HEAD
         title: "3DVLN Inference Acceleration with Topology-aware SpatialLM",
         period: "Nov 2025 — Present",
         summary:
@@ -669,15 +604,6 @@ export const resumes: Record<Locale, ResumeContent> = {
           "SpatialLM adaptation: added lightweight fusion and caching to reduce per-step recomputation; supported segment planning and local replanning loops.",
           "Tooling: implemented reproducible training/inference scripts and debugging visualizations (trajectories, retrieval hits, subgraph selection) to iterate on failure cases.",
           "Deployment exploration: evaluated quantization/pruning/compilation options and summarized practical latency–memory–accuracy trade-offs for edge vs server deployments.",
-=======
-        title: "Efficient VLM Inference & Deployment",
-        period: "Nov 2025 — Present",
-        summary:
-          "Inference and deployment under edge constraints; consolidated into one first-author IEEE/RAS IROS paper, currently under review.",
-        bullets: [
-          "Engineering experiments on multimodal inference pipelines and on-device deployment.",
-          "Trade-offs among latency, memory, and accuracy.",
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         ],
       },
     ],
@@ -687,18 +613,11 @@ export const resumes: Record<Locale, ResumeContent> = {
         role: "Co-founder · Product & engineering",
         period: "2025 — Present",
         summary:
-<<<<<<< HEAD
           "Invited speaker at Alibaba Cloud SME livestream and the 2050 conference in Yunqi Town (Hangzhou) for the session “A Marketer’s ‘Shrimp Farming’ Diary”; shared practical learnings on building and shipping an AI agent for content workflows and user insights.",
         imageSrc: "/photo/BUILD WITHQWEN·GenZ创造者48小时铜奖.jpg",
         bullets: [
           "Delivered talks and demo materials for live and in-person events, focusing on product narrative, user growth, and real-world adoption.",
           "Explored an end-to-end agent loop from capture → structuring → insight → actionable recommendations via multimodal reasoning and workflow orchestration.",
-=======
-          "Dream recording and psychology-style interpretation on Alibaba Cloud Bailian; iterating multimodal analysis and visualization.",
-        bullets: [
-          "Selected for showcase at the upcoming Qwen Conference.",
-          "Scheduled interview coverage with Alibaba Cloud.",
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         ],
       },
       {
@@ -707,10 +626,7 @@ export const resumes: Record<Locale, ResumeContent> = {
         period: "2025 — 2026",
         summary:
           "A virtual-idol project blending Chinese aesthetics and sci-fi narrative; exploring LLM-based character and interaction design.",
-<<<<<<< HEAD
         imageSrc: "/photo/深圳科创学院照片.jpg",
-=======
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
         bullets: [
           "Advanced to the preliminary round of the 2026 Global Developer Pioneer Conference · SE Super-Individual Entrepreneurship Challenge.",
         ],

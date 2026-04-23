@@ -14,12 +14,8 @@
   }
 
   body {
-<<<<<<< HEAD
     @apply bg-white text-zinc-800 antialiased font-sans dark:bg-zinc-950 dark:text-zinc-100;
     margin: 0;
-=======
-    @apply bg-zinc-50 text-zinc-900 antialiased font-sans dark:bg-zinc-950 dark:text-zinc-100;
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
   }
 
   ::selection {
@@ -27,7 +23,6 @@
   }
 }
 
-<<<<<<< HEAD
 .academic-page {
   min-height: 100vh;
 }
@@ -328,12 +323,6 @@
 .anchor,
 h1 {
   scroll-margin-top: 5.2rem;
-=======
-@layer utilities {
-  .card-surface {
-    @apply rounded-2xl border border-zinc-200 bg-white shadow-card dark:border-zinc-800 dark:bg-zinc-900/80 dark:shadow-cardDark;
-  }
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
 }
 
 @media print {
@@ -348,7 +337,6 @@ h1 {
   .print-break {
     break-inside: avoid;
   }
-<<<<<<< HEAD
 }
 
 @media (max-width: 960px) {
@@ -378,10 +366,5 @@ h1 {
   }
   .paper-image-frame img {
     height: 200px;
-=======
-
-  .card-surface {
-    @apply border-zinc-200 bg-white shadow-none;
->>>>>>> b94f76b7ab9afd10ef885100ae5dc05a1c3bab9a
   }
 }
