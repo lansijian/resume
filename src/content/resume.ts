@@ -275,7 +275,7 @@ export const resumes: Record<Locale, ResumeContent> = {
         role: "核心开发",
         period: "2025/10 — 2026/03",
         summary: "在华为昇腾 910B NPU 上部署视觉与大模型联合推理的交通枢纽智能系统。",
-        imageSrc: "/photo/Rokid银奖路演.jpg",
+        imageSrc: "/photo/hubguard-system-architecture.jpg",
         bullets: [
           "集成 YOLOv8n 与 Qwen2.5-7B，实时推理 25+ FPS，首 token 延迟 <200 ms。",
           "RAG + FastAPI 微服务，将感知结果转为可调度语义。",
@@ -284,17 +284,14 @@ export const resumes: Record<Locale, ResumeContent> = {
     ],
     research: [
       {
-        title: "3DVLN 推理加速：基于 SpatialLM 的拓扑网络机制",
-        period: "2025/11 — 至今",
+        title: "3D VLM 推理加速：基于 SpatialLM 的 ToMe3D",
+        period: "2025/11 — 至今 · AAAI 在投",
         summary:
-          "围绕 3D Vision-Language Navigation（3DVLN）任务的推理效率瓶颈开展研究：在 SpatialLM 框架上引入拓扑网络机制，对场景结构与导航决策进行显式建模，提升推理阶段的信息组织效率与可解释性，并探索端侧部署可行路径。",
-        imageSrc: "/photo/BUILD WITHQWEN·GenZ创造者48小时铜奖.jpg",
+          "面向具身机器人三维场景理解中的推理效率瓶颈，围绕 SpatialLM 的点云表征研究相似性感知的 token 合并机制，在保留关键空间结构的同时减少冗余计算，并探索移动机器人端侧部署。",
         bullets: [
-          "问题建模：分析 3DVLN 推理链路（视觉编码→语言条件化→地图/记忆→动作决策）的主要耗时与冗余计算来源，明确可优化的结构化信息瓶颈。",
-          "拓扑机制：构建环境拓扑图（房间/节点/可达边等）并与语言指令对齐，通过图消息传递/检索式路由将“全量场景特征”压缩为“决策相关子图”，减少无关上下文参与推理。",
-          "SpatialLM 适配：在 SpatialLM 的空间表征上叠加拓扑先验，设计轻量的融合模块与缓存策略，降低跨步推理重复计算；支持分段规划与局部重规划。",
-          "工程实现：实现可复现训练/推理脚本、可视化调试工具（轨迹、注意力/检索命中、子图选择），用于定位失败案例并迭代模型结构与数据策略。",
-          "部署探索：评估量化/裁剪/编译优化等手段对延迟与精度的影响，形成端侧与服务器侧部署的配置建议与边界条件。",
+          "研究对象：定位序列化点云 Transformer 在局部注意力中的冗余 token 与计算瓶颈。",
+          "方法方向：依据特征相似度完成局部 token 匹配与合并，并在注意力后恢复原始索引接口。",
+          "当前状态：论文正在 AAAI 投稿评审中；本页仅展示公开级项目概述，不公开未发表论文图与实现细节。",
         ],
       },
     ],
@@ -624,7 +621,7 @@ export const resumes: Record<Locale, ResumeContent> = {
         role: "Core Developer",
         period: "Oct 2025 — Mar 2026",
         summary: "Joint vision and LLM inference on Huawei Ascend 910B for hub intelligence.",
-        imageSrc: "/photo/Rokid银奖路演.jpg",
+        imageSrc: "/photo/hubguard-system-architecture.jpg",
         bullets: [
           "YOLOv8n + Qwen2.5-7B at 25+ FPS; first-token latency under 200 ms.",
           "RAG and FastAPI microservices for schedulable semantics.",
@@ -633,17 +630,14 @@ export const resumes: Record<Locale, ResumeContent> = {
     ],
     research: [
       {
-        title: "3DVLN Inference Acceleration with Topology-aware SpatialLM",
-        period: "Nov 2025 — Present",
+        title: "ToMe3D: Efficient 3D VLM Inference on SpatialLM",
+        period: "Nov 2025 — Present · Under review at AAAI",
         summary:
-          "Research on 3D Vision-Language Navigation (3DVLN) inference bottlenecks. Built a topology-aware mechanism on top of SpatialLM to explicitly model scene structure and instruction-conditioned routing, improving inference-time efficiency and interpretability, with an eye toward on-device deployment.",
-        imageSrc: "/photo/BUILD WITHQWEN·GenZ创造者48小时铜奖.jpg",
+          "Research on efficient 3D scene understanding for embodied robots. ToMe3D studies similarity-aware token merging for SpatialLM point-cloud representations, reducing redundant computation while preserving decision-relevant spatial structure for mobile deployment.",
         bullets: [
-          "Bottleneck analysis: decomposed the 3DVLN inference pipeline and identified redundant computation across steps and overlong context as key constraints.",
-          "Topology mechanism: constructed a navigation graph and aligned it with instructions; used message passing / retrieval-style routing to focus on decision-relevant subgraphs rather than full-scene context.",
-          "SpatialLM adaptation: added lightweight fusion and caching to reduce per-step recomputation; supported segment planning and local replanning loops.",
-          "Tooling: implemented reproducible training/inference scripts and debugging visualizations (trajectories, retrieval hits, subgraph selection) to iterate on failure cases.",
-          "Deployment exploration: evaluated quantization/pruning/compilation options and summarized practical latency–memory–accuracy trade-offs for edge vs server deployments.",
+          "Research focus: redundant tokens and computation inside local attention windows of serialized point-cloud transformers.",
+          "Method direction: feature-similarity-based local token matching and merging with index restoration after attention.",
+          "Status: under review at AAAI; this portfolio intentionally omits unpublished figures and implementation details.",
         ],
       },
     ],

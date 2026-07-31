@@ -2,6 +2,7 @@ import { getResume, type AwardEntry, type ProjectEntry } from "./content/resume"
 import { usePreferences } from "./preferences";
 import { useActiveSection } from "./hooks/useActiveSection";
 import { publicAssetUrl } from "./utils/publicAssetUrl";
+import { ParticleField } from "./components/ParticleField";
 
 const SECTION_IDS = [
   "hero",
@@ -114,11 +115,18 @@ function Media({ src, alt, className = "" }: { src?: string; alt: string; classN
 
 function WorkCard({ entry, index }: { entry: ProjectEntry; index: number }) {
   return (
-    <article className="work-card">
-      <div className="work-media">
-        <Media src={entry.imageSrc} alt={entry.title} />
-        <span className="card-index">{String(index + 1).padStart(2, "0")}</span>
-      </div>
+    <article className={`work-card ${entry.imageSrc ? "has-media" : "is-text-only"}`}>
+      {entry.imageSrc ? (
+        <div className="work-media">
+          <Media src={entry.imageSrc} alt={entry.title} />
+          <span className="card-index">{String(index + 1).padStart(2, "0")}</span>
+        </div>
+      ) : (
+        <div className="work-signal" aria-hidden="true">
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <strong>RESEARCH<br />IN REVIEW</strong>
+        </div>
+      )}
       <div className="work-copy">
         <div className="meta-row">
           <span>{entry.role}</span>
@@ -212,11 +220,8 @@ export default function App() {
   return (
     <div className="portfolio-shell">
       <div className="ambient-grain" aria-hidden="true" />
+      <ParticleField theme={theme} />
       <div className="theme-surprise" aria-hidden="true">
-        <span className="field-loop field-loop-left" />
-        <span className="field-loop field-loop-right" />
-        <span className="field-core" />
-        <span className="field-dust" />
         <span className="desk-fragment desk-fragment-one" />
         <span className="desk-fragment desk-fragment-two" />
         <span className="surprise-word" />

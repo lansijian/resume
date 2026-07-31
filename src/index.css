@@ -84,7 +84,7 @@ img {
   z-index: -2;
   inset: 0;
   pointer-events: none;
-  opacity: 0.28;
+  opacity: 0.34;
   background-image:
     radial-gradient(circle at center, var(--grain) 0 0.65px, transparent 0.85px),
     radial-gradient(circle at center, var(--grain) 0 0.5px, transparent 0.75px);
@@ -92,6 +92,23 @@ img {
   background-size: 11px 11px, 13px 13px;
   mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.65) 45%, transparent 100%);
   transition: opacity 480ms ease;
+}
+
+.particle-field {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.72;
+  mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 100%);
+  transition: opacity 480ms ease, filter 480ms ease;
+}
+
+.dark .particle-field {
+  opacity: 0.84;
+  filter: drop-shadow(0 0 7px rgba(190, 205, 213, 0.14));
 }
 
 .theme-surprise {
@@ -102,7 +119,7 @@ img {
   width: min(74vw, 1180px);
   aspect-ratio: 1.9;
   pointer-events: none;
-  opacity: 0.74;
+  opacity: 0.58;
   transform: rotate(-3deg);
 }
 
@@ -330,7 +347,7 @@ img {
   position: relative;
   padding: 0.3rem 0;
   color: var(--ink-soft);
-  font-size: 0.68rem;
+  font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -373,7 +390,7 @@ img {
   gap: 0.55rem;
   padding: 0;
   font-family: "DM Mono", monospace;
-  font-size: 0.61rem;
+  font-size: 0.7rem;
   letter-spacing: 0.08em;
 }
 
@@ -701,8 +718,8 @@ section {
 .archive-title {
   margin: 0 0 1.2rem;
   font-family: "DM Mono", monospace;
-  font-size: 0.64rem;
-  font-weight: 500;
+  font-size: 0.84rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -760,7 +777,7 @@ section {
 .profile-facts span {
   font-family: "DM Mono", monospace;
   color: var(--ink-soft);
-  font-size: 0.6rem;
+  font-size: 0.74rem;
   letter-spacing: 0.08em;
 }
 
@@ -790,6 +807,10 @@ section {
   order: 2;
 }
 
+.work-card:nth-child(even) .work-signal {
+  order: 2;
+}
+
 .work-card:nth-child(even) .work-copy {
   order: 1;
 }
@@ -799,6 +820,60 @@ section {
   overflow: hidden;
   min-height: 260px;
   background: var(--surface);
+}
+
+.work-signal {
+  position: relative;
+  display: flex;
+  min-height: 300px;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 1.25rem;
+  border: 1px solid var(--line-strong);
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 9%, var(--line) 9.5% 10%, transparent 10.5% 20%, var(--line) 20.5% 21%, transparent 21.5%),
+    repeating-radial-gradient(circle at 50% 50%, transparent 0 16px, var(--line) 17px, transparent 18px),
+    color-mix(in srgb, var(--surface) 82%, transparent);
+}
+
+.work-signal::before,
+.work-signal::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 58%;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.work-signal::before {
+  right: 50%;
+  transform: rotate(7deg);
+}
+
+.work-signal::after {
+  left: 50%;
+  transform: rotate(-7deg);
+}
+
+.work-signal span,
+.work-signal strong {
+  position: relative;
+  z-index: 1;
+  font-family: "DM Mono", monospace;
+}
+
+.work-signal span {
+  font-size: 0.76rem;
+}
+
+.work-signal strong {
+  align-self: end;
+  text-align: right;
+  font-size: clamp(1.5rem, 3.2vw, 3.4rem);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
 }
 
 .work-media img {
@@ -838,7 +913,8 @@ section {
   margin-bottom: 2rem;
   font-family: "DM Mono", monospace;
   color: var(--ink-soft);
-  font-size: 0.62rem;
+  font-size: 0.76rem;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -878,7 +954,7 @@ section {
   padding: 0.62rem 0 0.62rem 1.25rem;
   border-top: 1px solid var(--line);
   color: var(--ink-soft);
-  font-size: 0.78rem;
+  font-size: 0.86rem;
   line-height: 1.55;
 }
 
@@ -1046,7 +1122,7 @@ section {
 .award-period {
   margin: 0;
   font-family: "DM Mono", monospace;
-  font-size: 0.62rem;
+  font-size: 0.73rem;
 }
 
 .award-period {
@@ -1069,7 +1145,7 @@ section {
 .award-note {
   margin: 1rem 0 0;
   color: var(--ink-soft);
-  font-size: 0.76rem;
+  font-size: 0.84rem;
   line-height: 1.6;
 }
 
@@ -1103,13 +1179,13 @@ section {
   margin: 0;
   font-family: "DM Mono", monospace;
   color: var(--ink-soft);
-  font-size: 0.62rem;
+  font-size: 0.73rem;
 }
 
 .award-row h3,
 .award-row strong {
   margin: 0;
-  font-size: 0.83rem;
+  font-size: 0.92rem;
   line-height: 1.5;
 }
 
@@ -1146,7 +1222,8 @@ section {
   margin: 0 0 1rem;
   font-family: "DM Mono", monospace;
   color: var(--ink-soft);
-  font-size: 0.65rem;
+  font-size: 0.76rem;
+  font-weight: 600;
 }
 
 .timeline-item h3 {
@@ -1188,7 +1265,7 @@ section {
 
 .skills-grid span {
   font-family: "DM Mono", monospace;
-  font-size: 0.62rem;
+  font-size: 0.73rem;
 }
 
 .skills-grid h3 {
@@ -1265,7 +1342,7 @@ section {
   gap: 2rem;
   margin-top: 2rem;
   font-family: "DM Mono", monospace;
-  font-size: 0.67rem;
+  font-size: 0.76rem;
 }
 
 .contact-links a {
@@ -1278,7 +1355,7 @@ footer {
   align-items: center;
   min-height: 92px;
   font-family: "DM Mono", monospace;
-  font-size: 0.62rem;
+  font-size: 0.7rem;
 }
 
 footer span:nth-child(2) {
@@ -1400,6 +1477,7 @@ footer button {
   }
 
   .work-card:nth-child(even) .work-media,
+  .work-card:nth-child(even) .work-signal,
   .work-card:nth-child(even) .work-copy,
   .venture-card:nth-child(even) .venture-visual,
   .venture-card:nth-child(even) .venture-copy {
@@ -1558,6 +1636,7 @@ footer button {
 
   .no-print,
   .ambient-grain,
+  .particle-field,
   .theme-surprise {
     display: none !important;
   }
