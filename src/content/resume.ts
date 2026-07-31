@@ -29,6 +29,7 @@ export type AwardEntry = {
   role?: string;
   paragraphs?: string[];
   bullets?: string[];
+  images?: string[];
 };
 
 export type SkillGroup = {
@@ -299,6 +300,32 @@ export const resumes: Record<Locale, ResumeContent> = {
     ],
     ventures: [
       {
+        title: "灵境科技 · Edge3D",
+        role: "创始人兼 CEO · 算法架构与商业推进",
+        period: "2026 — 至今",
+        summary:
+          "面向商用四足机器人的边缘三维感知与巡检运行时：以 ToMe3D 为自研算法内核，将高效三维理解能力封装为可跨平台部署的 Edge3D Runtime，并以地下空间巡检作为首个商业化验证场景。",
+        imageSrc: "/photo/lingjing-edge3d-field-test.png",
+        bullets: [
+          "已完成算法基准、地下车库三维重建与真机实验链；推进设备适配、资源档位、日志与任务接口等 Runtime 产品化。",
+          "在固定场景实验中，注意力路径 GFLOPs 降低 63.0%，模型前向延迟降低 32.7%；约 30% token 保留时达到 78.58 mIoU。",
+          "与上海市人工智能行业协会（SAIA）建立战略共建合作，围绕资本规划、投资人引荐、项目路演与商务协同推进资源对接。",
+        ],
+      },
+      {
+        title: "形随 M1 · 智能人体工学工作站",
+        role: "发起人 · 产品、算法与市场",
+        period: "2026/07 — 至今",
+        summary:
+          "面向电动升降桌用户的主动人体工学显示系统，通过高度与前后距离两个电动自由度保存、恢复屏幕位置；以可靠复位为基础，本地感知与个体化建议作为可选增量。",
+        imageSrc: "/photo/morphwork-adventurex-prototype.jpg",
+        bullets: [
+          "在 AdventureX 2026 五天开发周期内，完成 RGB-D 感知、状态判断、运动规划与机械执行原型链路，获得主题 C 冠军。",
+          "Expo 当天约 70 人体验移动显示原型，约 7–10 人表达明确或潜在付费意向；这些数据作为早期需求线索，而非订单。",
+          "下一阶段推进专用两轴机构、10 台 Alpha 共创试用、供应链报价及小规模付费 Beta。",
+        ],
+      },
+      {
         title: "Dream Weaver（梦境记录与分析 Agent）",
         role: "联合创始人 · 产品与技术",
         period: "2025 — 至今",
@@ -308,17 +335,6 @@ export const resumes: Record<Locale, ResumeContent> = {
         bullets: [
           "在直播与线下活动中分享产品思路、用户增长与落地案例，沉淀可复用的方法论与演示材料。",
           "结合多模态能力与工作流编排，探索从“记录→结构化→洞察→行动建议”的闭环。",
-        ],
-      },
-      {
-        title: "「星璃计划」—— AI 驱动的国风科幻虚拟偶像",
-        role: "发起人",
-        period: "2025 — 2026",
-        summary:
-          "融合国风美学与科幻叙事的虚拟偶像企划，探索大模型在角色塑造与互动中的落地。",
-        imageSrc: "/photo/深圳科创学院照片.jpg",
-        bullets: [
-          "入围 2026 全球开发者先锋大会 · SE 超级个体创业实战大赛初赛。",
         ],
       },
     ],
@@ -367,6 +383,30 @@ export const resumes: Record<Locale, ResumeContent> = {
       },
     ],
     ecosystemAwards: [
+      {
+        title: "香港科技大学 InnoBay Summer Camp / Bootcamp",
+        issuer: "第一名 · Most Innovative Award",
+        period: "2026/07/02 — 2026/07/12",
+        imageSrc: "/photo/2026-innobay-most-innovative-award.jpg",
+        note: "在香港科技大学 Integrative Systems and Design 举办的 InnoBay Bootcamp 中完成创新项目，并获得 Most Innovative Award。",
+      },
+      {
+        title: "香港科技大学（广州）红鸟挑战营",
+        issuer: "Offer 待公布",
+        period: "2026",
+        note: "已参加挑战营，当前处于录取结果待公布状态；获得 Offer 后更新证明材料。",
+      },
+      {
+        title: "AdventureX 2026",
+        issuer: "主题 C 冠军",
+        period: "2026/07",
+        imageSrc: "/photo/2026-adventurex-team-champion.jpg",
+        images: [
+          "/photo/2026-adventurex-team-champion.jpg",
+          "/photo/2026-adventurex-theme-c-trophy.jpg",
+        ],
+        note: "在五大主题赛道之一的 C 赛道中夺冠；团队在五天内完成主动人体工学显示原型。",
+      },
       {
         title: "Rokid Spatial Joy 2025 全球 AR&AI 开发者大赛 · AI 赛道",
         issuer: "银奖",
@@ -609,6 +649,32 @@ export const resumes: Record<Locale, ResumeContent> = {
     ],
     ventures: [
       {
+        title: "Lingjing Technology · Edge3D",
+        role: "Founder & CEO · Algorithm architecture and commercialization",
+        period: "2026 — Present",
+        summary:
+          "An edge 3D perception and inspection runtime for commercial quadruped robots. ToMe3D provides the algorithmic core, Edge3D Runtime packages efficient 3D understanding for cross-platform deployment, and underground-space inspection serves as the first commercialization scenario.",
+        imageSrc: "/photo/lingjing-edge3d-field-test.png",
+        bullets: [
+          "Completed algorithm benchmarks, underground-garage 3D reconstruction, and a real-robot experiment chain; productizing device profiles, resource tiers, logging, and task APIs.",
+          "In controlled fixed-scene tests, reduced attention-path GFLOPs by 63.0% and model forward latency by 32.7%; achieved 78.58 mIoU at about 30% token retention.",
+          "Established a strategic co-building partnership with the Shanghai Artificial Intelligence Industry Association (SAIA) for capital planning, investor introductions, roadshows, and business coordination.",
+        ],
+      },
+      {
+        title: "MorphWork M1 · Active ergonomic workstation",
+        role: "Initiator · Product, algorithms, and market",
+        period: "Jul 2026 — Present",
+        summary:
+          "An active ergonomic display system for standing-desk users. Two powered axes save and restore monitor height and viewing distance; reliable recall is the core value, while local sensing and personalized suggestions remain optional.",
+        imageSrc: "/photo/morphwork-adventurex-prototype.jpg",
+        bullets: [
+          "Built an end-to-end RGB-D sensing, state inference, motion planning, and mechanical execution prototype in five days at AdventureX 2026; won Theme C.",
+          "About 70 people tried the moving-display prototype at Expo, with roughly 7–10 expressing explicit or potential willingness to pay; treated as early demand signals, not orders.",
+          "Next: a dedicated two-axis mechanism, 10 Alpha co-creation units, supplier quotations, and a small paid Beta.",
+        ],
+      },
+      {
         title: "Dream Weaver — Dream journaling & analysis agent",
         role: "Co-founder · Product & engineering",
         period: "2025 — Present",
@@ -618,17 +684,6 @@ export const resumes: Record<Locale, ResumeContent> = {
         bullets: [
           "Delivered talks and demo materials for live and in-person events, focusing on product narrative, user growth, and real-world adoption.",
           "Explored an end-to-end agent loop from capture → structuring → insight → actionable recommendations via multimodal reasoning and workflow orchestration.",
-        ],
-      },
-      {
-        title: "「星璃计划」 Xing Li — AI-driven Guofeng sci-fi virtual idol",
-        role: "Founder",
-        period: "2025 — 2026",
-        summary:
-          "A virtual-idol project blending Chinese aesthetics and sci-fi narrative; exploring LLM-based character and interaction design.",
-        imageSrc: "/photo/深圳科创学院照片.jpg",
-        bullets: [
-          "Advanced to the preliminary round of the 2026 Global Developer Pioneer Conference · SE Super-Individual Entrepreneurship Challenge.",
         ],
       },
     ],
@@ -677,6 +732,30 @@ export const resumes: Record<Locale, ResumeContent> = {
       },
     ],
     ecosystemAwards: [
+      {
+        title: "HKUST InnoBay Summer Camp / Bootcamp",
+        issuer: "First Place · Most Innovative Award",
+        period: "Jul 2–12, 2026",
+        imageSrc: "/photo/2026-innobay-most-innovative-award.jpg",
+        note: "Completed an innovation project in the InnoBay Bootcamp organized by HKUST Integrative Systems and Design and received the Most Innovative Award.",
+      },
+      {
+        title: "HKUST(GZ) Red Bird Challenge Camp",
+        issuer: "Offer pending",
+        period: "2026",
+        note: "Participated in the challenge camp; admission result is pending and supporting materials will be updated after an offer is issued.",
+      },
+      {
+        title: "AdventureX 2026",
+        issuer: "Theme C Champion",
+        period: "Jul 2026",
+        imageSrc: "/photo/2026-adventurex-team-champion.jpg",
+        images: [
+          "/photo/2026-adventurex-team-champion.jpg",
+          "/photo/2026-adventurex-theme-c-trophy.jpg",
+        ],
+        note: "Won Theme C, one of five themed tracks, after building an active ergonomic display prototype in five days.",
+      },
       {
         title: "Rokid Spatial Joy 2025 Global AR & AI Developer Contest · AI Track",
         issuer: "Silver Award",

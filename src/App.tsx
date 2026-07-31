@@ -1,37 +1,155 @@
-import { getResume, type ProjectEntry } from "./content/resume";
+import { getResume, type AwardEntry, type ProjectEntry } from "./content/resume";
 import { usePreferences } from "./preferences";
 import { useActiveSection } from "./hooks/useActiveSection";
 import { publicAssetUrl } from "./utils/publicAssetUrl";
 
-const ACADEMIC_SECTIONS = [
-  "about-me",
-  "gallery",
-  "news",
-  "publications",
+const SECTION_IDS = [
+  "hero",
+  "profile",
+  "work",
+  "ventures",
   "honors",
-  "educations",
-  "internships",
+  "experience",
   "skills",
   "contact",
 ] as const;
 
-function ProjectPaper({ entry }: { entry: ProjectEntry }) {
+type Locale = "zh" | "en";
+
+const copy = {
+  zh: {
+    nav: ["首页", "档案", "项目", "创业", "荣誉", "经历", "技能", "联系"],
+    eyebrow: "AI × ROBOTICS × VENTURES",
+    availability: "上海 / 面向全球协作",
+    intro: "个人档案",
+    introKicker: "PROFILE / 01",
+    work: "工程与研究",
+    workKicker: "SELECTED WORK / 02",
+    ventures: "正在构建",
+    venturesKicker: "VENTURES / 03",
+    venturesLead: "从算法验证到真实世界交付。三个项目，三种尺度。",
+    honors: "荣誉与现场",
+    honorsKicker: "RECOGNITION / 04",
+    experience: "教育与经历",
+    experienceKicker: "EXPERIENCE / 05",
+    skills: "能力栈",
+    skillsKicker: "TOOLKIT / 06",
+    contact: "一起做点有意思的事",
+    contactKicker: "CONTACT / 07",
+    contactLead: "对具身智能、机器人系统、VLM 推理与早期创业合作保持开放。",
+    selected: "重点记录",
+    archive: "完整荣誉档案",
+    projects: "项目与研究",
+    internship: "实习",
+    campus: "校内角色",
+    education: "教育",
+    status: "STATUS",
+    present: "PRESENT",
+    light: "切换至夜间",
+    dark: "切换至日间",
+    language: "EN",
+    scroll: "向下探索",
+    built: "Designed as a living portfolio · 2026",
+  },
+  en: {
+    nav: ["Home", "Profile", "Work", "Ventures", "Honors", "Experience", "Skills", "Contact"],
+    eyebrow: "AI × ROBOTICS × VENTURES",
+    availability: "Shanghai / Open to global collaboration",
+    intro: "Profile",
+    introKicker: "PROFILE / 01",
+    work: "Engineering & Research",
+    workKicker: "SELECTED WORK / 02",
+    ventures: "Building Now",
+    venturesKicker: "VENTURES / 03",
+    venturesLead: "From validated algorithms to delivery in the physical world. Three projects, three scales.",
+    honors: "Recognition & Field Notes",
+    honorsKicker: "RECOGNITION / 04",
+    experience: "Education & Experience",
+    experienceKicker: "EXPERIENCE / 05",
+    skills: "Toolkit",
+    skillsKicker: "TOOLKIT / 06",
+    contact: "Let’s build something that matters",
+    contactKicker: "CONTACT / 07",
+    contactLead: "Open to collaboration across embodied AI, robotics systems, VLM inference, and early-stage ventures.",
+    selected: "Featured",
+    archive: "Full recognition archive",
+    projects: "Projects & research",
+    internship: "Internship",
+    campus: "Campus roles",
+    education: "Education",
+    status: "STATUS",
+    present: "PRESENT",
+    light: "Switch to night",
+    dark: "Switch to day",
+    language: "中",
+    scroll: "Explore",
+    built: "Designed as a living portfolio · 2026",
+  },
+} satisfies Record<Locale, Record<string, string | string[]>>;
+
+function SectionHeading({
+  kicker,
+  title,
+  lead,
+}: {
+  kicker: string;
+  title: string;
+  lead?: string;
+}) {
   return (
-    <article className="paper-box">
-      {entry.imageSrc ? (
-        <div className="paper-box-image no-print">
-          <div className="paper-image-frame">
-            <img src={publicAssetUrl(entry.imageSrc)} alt="" loading="lazy" />
-          </div>
+    <div className="section-heading">
+      <div>
+        <p className="section-kicker">{kicker}</p>
+        <h2>{title}</h2>
+      </div>
+      {lead ? <p className="section-lead">{lead}</p> : null}
+    </div>
+  );
+}
+
+function Media({ src, alt, className = "" }: { src?: string; alt: string; className?: string }) {
+  if (!src) return null;
+  return <img className={className} src={publicAssetUrl(src)} alt={alt} loading="lazy" />;
+}
+
+function WorkCard({ entry, index }: { entry: ProjectEntry; index: number }) {
+  return (
+    <article className="work-card">
+      <div className="work-media">
+        <Media src={entry.imageSrc} alt={entry.title} />
+        <span className="card-index">{String(index + 1).padStart(2, "0")}</span>
+      </div>
+      <div className="work-copy">
+        <div className="meta-row">
+          <span>{entry.role}</span>
+          <span>{entry.period}</span>
         </div>
-      ) : null}
-      <div className="paper-box-text">
         <h3>{entry.title}</h3>
-        <p>
-          <strong>{entry.role}</strong> <span className="muted-dot">|</span>{" "}
-          <span className="paper-period">{entry.period}</span>
-        </p>
-        <p>{entry.summary}</p>
+        <p className="summary">{entry.summary}</p>
+        <ul>
+          {entry.bullets.slice(0, 3).map((bullet) => (
+            <li key={bullet}>{bullet}</li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  );
+}
+
+function VentureCard({ entry, index }: { entry: ProjectEntry; index: number }) {
+  return (
+    <article className={`venture-card venture-${index + 1}`}>
+      <div className="venture-visual">
+        <Media src={entry.imageSrc} alt={entry.title} />
+        <span className="venture-number">0{index + 1}</span>
+      </div>
+      <div className="venture-copy">
+        <div className="meta-row">
+          <span>{entry.role}</span>
+          <span>{entry.period}</span>
+        </div>
+        <h3>{entry.title}</h3>
+        <p className="summary">{entry.summary}</p>
         <ul>
           {entry.bullets.map((bullet) => (
             <li key={bullet}>{bullet}</li>
@@ -42,316 +160,310 @@ function ProjectPaper({ entry }: { entry: ProjectEntry }) {
   );
 }
 
-type I18n = {
-  nav: {
-    home: string;
-    gallery: string;
-    news: string;
-    works: string;
-    honors: string;
-    education: string;
-    internships: string;
-    skills: string;
-    contact: string;
-  };
-  section: {
-    aboutTitle: string;
-    galleryTitle: string;
-    newsTitle: string;
-    worksTitle: string;
-    honorsTitle: string;
-    educationTitle: string;
-    internshipsTitle: string;
-    skillsTitle: string;
-    contactTitle: string;
-  };
-  sidebar: {
-    locationLabel: string;
-    emailLabel: string;
-    phoneLabel: string;
-    githubLabel: string;
-  };
-  role: { research: string };
-  meta: { separator: string };
-};
+function awardImages(award: AwardEntry) {
+  if (award.images?.length) return award.images;
+  return award.imageSrc ? [award.imageSrc] : [];
+}
 
-const I18N: Record<"zh" | "en", I18n> = {
-  zh: {
-    nav: {
-      home: "主页",
-      gallery: "照片",
-      news: "动态",
-      works: "成果",
-      honors: "荣誉",
-      education: "教育",
-      internships: "实习",
-      skills: "技能",
-      contact: "联系",
-    },
-    section: {
-      aboutTitle: "关于我",
-      galleryTitle: "📷 精选照片",
-      newsTitle: "🔥 动态",
-      worksTitle: "📝 成果（项目 / 科研 / 创业）",
-      honorsTitle: "🎖 荣誉与奖项",
-      educationTitle: "📖 教育经历",
-      internshipsTitle: "💻 实习经历",
-      skillsTitle: "🧰 技能",
-      contactTitle: "✉️ 联系方式",
-    },
-    sidebar: {
-      locationLabel: "地区",
-      emailLabel: "邮箱",
-      phoneLabel: "手机",
-      githubLabel: "GitHub",
-    },
-    role: { research: "科研项目" },
-    meta: { separator: "·" },
-  },
-  en: {
-    nav: {
-      home: "Homepage",
-      gallery: "Gallery",
-      news: "News",
-      works: "Works",
-      honors: "Honors",
-      education: "Education",
-      internships: "Internships",
-      skills: "Skills",
-      contact: "Contact",
-    },
-    section: {
-      aboutTitle: "About Me",
-      galleryTitle: "📷 Featured Photos",
-      newsTitle: "🔥 News",
-      worksTitle: "📝 Publications & Projects",
-      honorsTitle: "🎖 Honors and Awards",
-      educationTitle: "📖 Educations",
-      internshipsTitle: "💻 Internships",
-      skillsTitle: "🧰 Skills",
-      contactTitle: "✉️ Contact",
-    },
-    sidebar: {
-      locationLabel: "Location",
-      emailLabel: "Email",
-      phoneLabel: "Phone",
-      githubLabel: "GitHub",
-    },
-    role: { research: "Research" },
-    meta: { separator: "·" },
-  },
-};
+function FeaturedAward({ award, index }: { award: AwardEntry; index: number }) {
+  const images = awardImages(award);
+  return (
+    <article className={`award-feature ${images.length === 0 ? "is-text-only" : ""}`}>
+      {images.length ? (
+        <div className={`award-media image-count-${images.length}`}>
+          {images.map((src, imageIndex) => (
+            <Media key={src} src={src} alt={`${award.title} ${imageIndex + 1}`} />
+          ))}
+        </div>
+      ) : (
+        <div className="award-placeholder" aria-hidden="true">
+          <span>RESULT</span>
+          <strong>PENDING</strong>
+        </div>
+      )}
+      <div className="award-copy">
+        <p className="award-count">0{index + 1}</p>
+        <div>
+          <p className="award-period">{award.period}</p>
+          <h3>{award.title}</h3>
+          <p className="award-prize">{award.issuer}</p>
+          {award.note ? <p className="award-note">{award.note}</p> : null}
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export default function App() {
   const { locale, theme, setTheme, setLocale } = usePreferences();
   const resume = getResume(locale);
-  const t = I18N[locale];
-  const sectionIds = ACADEMIC_SECTIONS.map((s) => s.toString());
-  const activeId = useActiveSection(sectionIds);
-  const newsItems =
-    resume.campusExperience.flatMap((item) => item.lines.map((line) => `${item.period} · ${line}`)) ?? [];
-  const publicationLike = [
+  const t = copy[locale];
+  const activeId = useActiveSection([...SECTION_IDS]);
+  const selectedWork: ProjectEntry[] = [
     ...resume.projects,
-    ...resume.research.map((entry) => ({
-      title: entry.title,
-      role: t.role.research,
-      period: entry.period,
-      summary: entry.summary,
-      bullets: entry.bullets,
-    })),
-    ...resume.ventures,
+    ...resume.research.map((item) => ({ ...item, role: locale === "zh" ? "科研项目" : "Research" })),
   ];
+  const allAwards = [...resume.ecosystemAwards, ...resume.awards];
+  const featuredAwards = resume.ecosystemAwards.slice(0, 3);
 
-  const navItems = [
-    { id: "about-me", label: t.nav.home },
-    { id: "gallery", label: t.nav.gallery },
-    { id: "news", label: t.nav.news },
-    { id: "publications", label: t.nav.works },
-    { id: "honors", label: t.nav.honors },
-    { id: "educations", label: t.nav.education },
-    { id: "internships", label: t.nav.internships },
-    { id: "skills", label: t.nav.skills },
-    { id: "contact", label: t.nav.contact },
-  ];
-
-  const scrollTo = (id: string) => {
+  const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
 
   return (
-    <div className="academic-page">
-      <header className="masthead no-print">
-        <div className="masthead__inner-wrap">
-          <div className="masthead__menu">
-            <nav className="greedy-nav" aria-label="Primary">
-              <ul className="visible-links">
-                <li className="masthead__menu-item masthead__menu-item--lg">
-                  <button type="button" onClick={() => scrollTo("about-me")}>
-                    {t.nav.home}
-                  </button>
-                </li>
-                {navItems.slice(1).map((item) => (
-                  <li key={item.id} className={`masthead__menu-item ${activeId === item.id ? "is-active" : ""}`}>
-                    <button type="button" onClick={() => scrollTo(item.id)}>
-                      {item.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              <div className="masthead__controls">
-                <button type="button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-                  {theme === "dark" ? resume.labels.themeLight : resume.labels.themeDark}
-                </button>
-                <button type="button" onClick={() => setLocale(locale === "zh" ? "en" : "zh")}>
-                  {locale === "zh" ? resume.labels.langEn : resume.labels.langZh}
-                </button>
-              </div>
-            </nav>
-          </div>
+    <div className="portfolio-shell">
+      <div className="ambient-grain" aria-hidden="true" />
+      <div className="theme-surprise" aria-hidden="true">
+        <span className="field-loop field-loop-left" />
+        <span className="field-loop field-loop-right" />
+        <span className="field-core" />
+        <span className="field-dust" />
+        <span className="desk-fragment desk-fragment-one" />
+        <span className="desk-fragment desk-fragment-two" />
+        <span className="surprise-word" />
+      </div>
+
+      <header className="topbar no-print">
+        <button className="monogram" type="button" onClick={() => scrollTo("hero")} aria-label="Home">
+          CTY<span>°</span>
+        </button>
+        <nav aria-label="Primary navigation">
+          {SECTION_IDS.map((id, index) => (
+            <button
+              key={id}
+              type="button"
+              className={activeId === id ? "active" : ""}
+              onClick={() => scrollTo(id)}
+            >
+              {t.nav[index]}
+            </button>
+          ))}
+        </nav>
+        <div className="top-actions">
+          <button
+            className="theme-toggle"
+            type="button"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            aria-label={theme === "dark" ? t.dark : t.light}
+          >
+            <span className="toggle-track">
+              <span className="toggle-dot" />
+            </span>
+            <span>{theme === "dark" ? "NIGHT" : "DAY"}</span>
+          </button>
+          <button className="language-toggle" type="button" onClick={() => setLocale(locale === "zh" ? "en" : "zh")}>
+            {t.language}
+          </button>
         </div>
       </header>
 
-      <div id="main" role="main" className="main-layout">
-        <aside className="sidebar sticky">
-          <div className="author__avatar">
-            {resume.personal.photoSrc ? (
-              <img src={publicAssetUrl(resume.personal.photoSrc)} alt={resume.meta.name} />
-            ) : null}
-          </div>
-          <h3 className="author__name">{resume.meta.name}</h3>
-          <p className="author__bio">{resume.meta.tagline}</p>
-          <div className="author__urls-wrapper">
-            <ul className="author__urls social-icons">
-              {resume.contact.location ? (
-                <li>
-                  <strong>{t.sidebar.locationLabel}</strong>
-                  <span className="muted-dot">{t.meta.separator}</span>
-                  {resume.contact.location}
-                </li>
-              ) : null}
-              <li>
-                <strong>{resume.labels.emailLabel}</strong>
-                <span className="muted-dot">{t.meta.separator}</span>
-                <a href={`mailto:${resume.contact.email}`}>{resume.contact.email}</a>
-              </li>
-              <li>
-                <strong>{resume.labels.phoneLabel}</strong>
-                <span className="muted-dot">{t.meta.separator}</span>
-                <a href={`tel:${resume.personal.phone.replace(/\s/g, "")}`}>{resume.personal.phone}</a>
-              </li>
-              {resume.contact.github ? (
-                <li>
-                  <strong>{t.sidebar.githubLabel}</strong>
-                  <span className="muted-dot">{t.meta.separator}</span>
-                  <a href={resume.contact.github} target="_blank" rel="noreferrer noopener">
-                    {resume.contact.github.replace(/^https?:\/\//, "")}
-                  </a>
-                </li>
-              ) : null}
-            </ul>
-          </div>
-        </aside>
-
-        <article className="page" itemScope itemType="http://schema.org/CreativeWork">
-          <div className="page__inner-wrap">
-            <section className="page__content" itemProp="text">
-              <span className="anchor" id="about-me" />
-              <h1 className="section-title">{t.section.aboutTitle}</h1>
-              <p>{resume.meta.heroSubtitle}</p>
-
-              <h1 id="gallery">{t.section.galleryTitle}</h1>
-              <div className="photo-grid">
-                {[
-                  "/photo/Rokid银奖.jpeg",
-                  "/photo/RoboMaster超级对抗赛合影.jpg",
-                  "/photo/RoboMaster赛场照片.jpg",
-                ].map((src) => (
-                  <figure key={src} className="photo-card no-print">
-                    <img src={publicAssetUrl(src)} alt="" loading="lazy" />
-                  </figure>
-                ))}
+      <main>
+        <section id="hero" className="hero-section">
+          <div className="hero-grid">
+            <div className="hero-copy">
+              <div className="hero-topline">
+                <span>{t.eyebrow}</span>
+                <span>{t.availability}</span>
               </div>
+              <p className="hero-status">
+                <span className="status-pulse" />
+                {t.status} / {t.present}
+              </p>
+              <h1>
+                <span>{locale === "zh" ? "陈庭宇" : "CHEN"}</span>
+                <span className="outline-name">{locale === "zh" ? "TINGYU" : "TINGYU"}</span>
+              </h1>
+              <p className="hero-tagline">{resume.meta.tagline}</p>
+              <p className="hero-subtitle">{resume.meta.heroSubtitle}</p>
+              <div className="hero-cta">
+                <button type="button" onClick={() => scrollTo("ventures")}>
+                  {t.ventures}
+                  <span>↘</span>
+                </button>
+                <a href={`mailto:${resume.contact.email}`}>{resume.contact.email}</a>
+              </div>
+            </div>
 
-              <h1 id="news">{t.section.newsTitle}</h1>
-              <ul>
-                {newsItems.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-
-              <h1 id="publications">{t.section.worksTitle}</h1>
-              {publicationLike.map((entry) => (
-                <ProjectPaper key={`${entry.title}-${entry.period}`} entry={entry} />
-              ))}
-
-              <h1 id="honors">{t.section.honorsTitle}</h1>
-              <ul>
-                {[...resume.awards, ...resume.ecosystemAwards].map((award) => (
-                  <li key={`${award.title}-${award.period}`}>
-                    <strong>{award.period}</strong> {award.title}
-                    {award.issuer ? ` · ${award.issuer}` : ""}
-                  </li>
-                ))}
-              </ul>
-
-              <h1 id="educations">{t.section.educationTitle}</h1>
-              <ul>
-                {resume.education.map((edu) => (
-                  <li key={`${edu.school}-${edu.period}`}>
-                    <strong>{edu.period}</strong> {edu.school} - {edu.degree}
-                    <ul>
-                      {edu.details.map((detail) => (
-                        <li key={detail}>{detail}</li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-              </ul>
-
-              <h1 id="internships">{t.section.internshipsTitle}</h1>
-              {resume.internships.map((entry) => (
-                <ProjectPaper key={`${entry.title}-${entry.period}`} entry={entry} />
-              ))}
-
-              <h1 id="skills">{t.section.skillsTitle}</h1>
-              <ul>
-                {resume.skills.map((group) => (
-                  <li key={group.name}>
-                    <strong>{group.name}:</strong> {group.items.join(", ")}
-                  </li>
-                ))}
-              </ul>
-
-              <h1 id="contact">{t.section.contactTitle}</h1>
-              <ul>
-                <li>
-                  <strong>{resume.labels.emailLabel}:</strong>{" "}
-                  <a href={`mailto:${resume.contact.email}`}>{resume.contact.email}</a>
-                </li>
-                {resume.contact.phone ? (
-                  <li>
-                    <strong>{resume.labels.phoneLabel}:</strong>{" "}
-                    <a href={`tel:${resume.contact.phone.replace(/\s/g, "")}`}>{resume.contact.phone}</a>
-                  </li>
-                ) : null}
-                {resume.contact.location ? (
-                  <li>
-                    <strong>{resume.labels.locationLabel}:</strong> {resume.contact.location}
-                  </li>
-                ) : null}
-                {resume.contact.linkedin ? (
-                  <li>
-                    <strong>LinkedIn:</strong>{" "}
-                    <a href={resume.contact.linkedin} target="_blank" rel="noreferrer noopener">
-                      {resume.contact.linkedin}
-                    </a>
-                  </li>
-                ) : null}
-              </ul>
-            </section>
+            <div className="portrait-block">
+              <div className="portrait-frame">
+                <Media src={resume.personal.photoSrc} alt={resume.meta.name} />
+                <span className="portrait-scanline" />
+              </div>
+              <div className="portrait-meta">
+                <span>23.1136° N</span>
+                <span>113.3245° E</span>
+              </div>
+            </div>
           </div>
-        </article>
-      </div>
+
+          <div className="hero-footer">
+            <div className="metric">
+              <strong>{String(allAwards.length).padStart(2, "0")}</strong>
+              <span>{locale === "zh" ? "荣誉与奖项" : "honors & awards"}</span>
+            </div>
+            <div className="metric">
+              <strong>{String(resume.ventures.length).padStart(2, "0")}</strong>
+              <span>{locale === "zh" ? "在建项目" : "active ventures"}</span>
+            </div>
+            <div className="metric">
+              <strong>{String(selectedWork.length).padStart(2, "0")}</strong>
+              <span>{locale === "zh" ? "工程与研究" : "engineering & research"}</span>
+            </div>
+            <button className="scroll-cue" type="button" onClick={() => scrollTo("profile")}>
+              {t.scroll} <span>↓</span>
+            </button>
+          </div>
+        </section>
+
+        <section id="profile" className="content-section profile-section">
+          <SectionHeading kicker={t.introKicker} title={t.intro} />
+          <div className="profile-grid">
+            <p className="profile-statement">{resume.meta.heroSubtitle}</p>
+            <div className="profile-facts">
+              <div>
+                <span>{locale === "zh" ? "当前方向" : "CURRENT FOCUS"}</span>
+                <strong>Embodied AI / Edge 3D / VLM</strong>
+              </div>
+              <div>
+                <span>{locale === "zh" ? "所在城市" : "BASED IN"}</span>
+                <strong>{resume.contact.location}</strong>
+              </div>
+              <div>
+                <span>{locale === "zh" ? "校内角色" : "CAMPUS ROLES"}</span>
+                <strong>{resume.campusExperience[0]?.lines.join(" · ")}</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="work" className="content-section work-section">
+          <SectionHeading kicker={t.workKicker} title={t.work} lead={t.projects} />
+          <div className="work-list">
+            {selectedWork.map((entry, index) => (
+              <WorkCard key={`${entry.title}-${entry.period}`} entry={entry} index={index} />
+            ))}
+          </div>
+        </section>
+
+        <section id="ventures" className="content-section ventures-section">
+          <SectionHeading kicker={t.venturesKicker} title={t.ventures} lead={t.venturesLead} />
+          <div className="venture-list">
+            {resume.ventures.map((entry, index) => (
+              <VentureCard key={`${entry.title}-${entry.period}`} entry={entry} index={index} />
+            ))}
+          </div>
+        </section>
+
+        <section id="honors" className="content-section honors-section">
+          <SectionHeading kicker={t.honorsKicker} title={t.honors} lead={t.selected} />
+          <div className="featured-awards">
+            {featuredAwards.map((award, index) => (
+              <FeaturedAward key={`${award.title}-${award.period}`} award={award} index={index} />
+            ))}
+          </div>
+          <div className="award-archive">
+            <p className="archive-title">{t.archive}</p>
+            {allAwards.slice(3).map((award, index) => (
+              <article key={`${award.title}-${award.period}`} className="award-row">
+                <span>{String(index + 4).padStart(2, "0")}</span>
+                <p>{award.period}</p>
+                <h3>{award.title}</h3>
+                <strong>{award.issuer}</strong>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="experience" className="content-section experience-section">
+          <SectionHeading kicker={t.experienceKicker} title={t.experience} />
+          <div className="experience-grid">
+            <div className="experience-column">
+              <p className="column-label">{t.education}</p>
+              {resume.education.map((item) => (
+                <article className="timeline-item" key={`${item.school}-${item.period}`}>
+                  <p>{item.period}</p>
+                  <h3>{item.school}</h3>
+                  <strong>{item.degree}</strong>
+                  <ul>
+                    {item.details.map((detail) => (
+                      <li key={detail}>{detail}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+              <p className="column-label secondary-label">{t.campus}</p>
+              {resume.campusExperience.map((item) => (
+                <article className="timeline-item compact" key={item.period}>
+                  <p>{item.period}</p>
+                  {item.lines.map((line) => (
+                    <h3 key={line}>{line}</h3>
+                  ))}
+                </article>
+              ))}
+            </div>
+            <div className="experience-column">
+              <p className="column-label">{t.internship}</p>
+              {resume.internships.map((entry) => (
+                <article className="timeline-item" key={`${entry.title}-${entry.period}`}>
+                  <p>{entry.period}</p>
+                  <h3>{entry.title}</h3>
+                  <strong>{entry.role}</strong>
+                  <p className="summary">{entry.summary}</p>
+                  <ul>
+                    {entry.bullets.slice(0, 4).map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="skills" className="content-section skills-section">
+          <SectionHeading kicker={t.skillsKicker} title={t.skills} />
+          <div className="skills-grid">
+            {resume.skills.map((group, index) => (
+              <article key={group.name}>
+                <span>0{index + 1}</span>
+                <h3>{group.name}</h3>
+                <p>{group.items.join(" · ")}</p>
+              </article>
+            ))}
+            <article>
+              <span>0{resume.skills.length + 1}</span>
+              <h3>{locale === "zh" ? "证书" : "Credentials"}</h3>
+              <p>{resume.certificates.map((item) => `${item.title} ${item.detail ?? ""}`).join(" · ")}</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="contact" className="contact-section">
+          <p className="section-kicker">{t.contactKicker}</p>
+          <h2>{t.contact}</h2>
+          <p>{t.contactLead}</p>
+          <a className="contact-email" href={`mailto:${resume.contact.email}`}>
+            {resume.contact.email}
+            <span>↗</span>
+          </a>
+          <div className="contact-links">
+            {resume.contact.github ? (
+              <a href={resume.contact.github} target="_blank" rel="noreferrer noopener">
+                GitHub ↗
+              </a>
+            ) : null}
+            <a href={`tel:${resume.contact.phone?.replace(/\s/g, "")}`}>{resume.contact.phone}</a>
+            <span>{resume.contact.location}</span>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <span>{resume.meta.name}</span>
+        <span>{t.built}</span>
+        <button type="button" onClick={() => scrollTo("hero")}>
+          TOP ↑
+        </button>
+      </footer>
     </div>
   );
 }
